@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>华体会 · 知识库导航</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+        }
+        body {
+            background: #f4f9fb;
+            color: #1c2e36;
+            line-height: 1.6;
+            padding: 2rem 1.2rem;
+        }
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        /* 页眉 / 站点身份 */
+        .site-header {
+            text-align: center;
+            margin-bottom: 2.8rem;
+        }
+        .site-header h1 {
+            font-size: 2rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            color: #0a4b5c;
+            display: inline-block;
+            border-bottom: 3px solid #3fa7b0;
+            padding-bottom: 0.5rem;
+        }
+        .site-header .sub {
+            margin-top: 0.6rem;
+            color: #3f6e7a;
+            font-size: 0.95rem;
+        }
+
+        /* 目录式网格卡 */
+        .grid-shelf {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0 2.5rem;
+        }
+        .info-card {
+            background: white;
+            border-radius: 20px;
+            padding: 1.6rem 1.5rem;
+            box-shadow: 0 8px 18px rgba(24, 84, 94, 0.06);
+            transition: all 0.2s;
+            border: 1px solid #daedf0;
+        }
+        .info-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 14px 28px rgba(24, 84, 94, 0.1);
+            border-color: #8fcbd1;
+        }
+        .info-card .card-icon {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            color: #3fa7b0;
+        }
+        .info-card h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #0f4d5d;
+            margin-bottom: 0.6rem;
+            letter-spacing: 0.3px;
+        }
+        .info-card p {
+            font-size: 0.95rem;
+            color: #2e4f5a;
+        }
+        .info-card .tag {
+            display: inline-block;
+            background: #d7eef2;
+            color: #106772;
+            font-size: 0.75rem;
+            padding: 0.2rem 0.8rem;
+            border-radius: 30px;
+            margin-top: 0.8rem;
+            font-weight: 500;
+        }
+
+        /* 说明区 · 承接段落 */
+        .explain-block {
+            background: #e5f3f5;
+            padding: 1.8rem 2rem;
+            border-radius: 28px;
+            margin: 2.2rem 0 2.8rem;
+            border-left: 5px solid #3fa7b0;
+        }
+        .explain-block p {
+            margin-bottom: 0.85rem;
+            color: #1b3f48;
+            font-size: 0.98rem;
+        }
+        .explain-block p:last-child {
+            margin-bottom: 0;
+        }
+        .explain-block strong {
+            color: #0a5b68;
+        }
+
+        /* 提示区 */
+        .tip-area {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.2rem;
+            background: white;
+            border-radius: 30px;
+            padding: 1.8rem 2rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+            border: 1px solid #cbe3e7;
+            margin-bottom: 2.5rem;
+        }
+        .tip-item {
+            flex: 1 1 200px;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.8rem;
+        }
+        .tip-marker {
+            background: #3fa7b0;
+            min-width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-top: 3px;
+        }
+        .tip-content {
+            font-size: 0.92rem;
+            color: #1c3c45;
+        }
+        .tip-content b {
+            color: #0f5d6b;
+        }
+
+        /* FAQ 摘要卡片 */
+        .faq-digest {
+            background: white;
+            border-radius: 28px;
+            padding: 1.6rem 1.8rem;
+            margin: 2.8rem 0 2rem;
+            border: 1px solid #cfdde0;
+        }
+        .faq-digest h2 {
+            font-size: 1.3rem;
+            font-weight: 500;
+            color: #0a4b5c;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .faq-digest h2 span {
+            background: #3fa7b0;
+            color: white;
+            font-size: 0.8rem;
+            padding: 0.1rem 0.9rem;
+            border-radius: 30px;
+        }
+        .qa-item {
+            padding: 0.8rem 0;
+            border-bottom: 1px dashed #d0e3e6;
+        }
+        .qa-item:last-child {
+            border-bottom: none;
+        }
+        .qa-q {
+            font-weight: 600;
+            color: #135e6b;
+            font-size: 0.95rem;
+        }
+        .qa-a {
+            margin-top: 0.15rem;
+            color: #2f535e;
+            font-size: 0.92rem;
+        }
+
+        /* 相关信息区 */
+        .rel-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.2rem;
+            margin-top: 1.5rem;
+            padding: 1rem 0;
+        }
+        .rel-item {
+            background: #e5f2f5;
+            padding: 0.6rem 1.2rem;
+            border-radius: 40px;
+            font-size: 0.9rem;
+            color: #0c4350;
+            border: 1px solid #bad6db;
+        }
+
+        /* 页脚 */
+        .footer-note {
+            margin-top: 3.5rem;
+            text-align: center;
+            font-size: 0.85rem;
+            color: #51727c;
+            border-top: 1px solid #c4d9de;
+            padding-top: 2rem;
+        }
+        .footer-note a {
+            color: #0f6d7c;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .footer-note a:hover {
+            text-decoration: underline;
+        }
+
+        /* 响应式微调 */
+        @media (max-width: 600px) {
+            body { padding: 1.5rem 1rem; }
+            .site-header h1 { font-size: 1.6rem; }
+            .explain-block { padding: 1.4rem; }
+            .tip-area { padding: 1.4rem; }
+            .faq-digest { padding: 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <!-- 站点标识 -->
+    <header class="site-header">
+        <h1>📚 华体会 · 知识库</h1>
+        <div class="sub">可信说明 · 目录导览 · 信息整合</div>
+    </header>
+
+    <!-- 目录式卡片网格：知识库入口感 -->
+    <div class="grid-shelf">
+        <div class="info-card">
+            <div class="card-icon">🗂️</div>
+            <h3>站点概况</h3>
+            <p>面向中文用户的综合信息门户，提供多领域内容索引与参考资源。结构清晰，便于检索。</p>
+            <span class="tag">资源导航</span>
+        </div>
+        <div class="info-card">
+            <div class="card-icon">🔍</div>
+            <h3>可信说明</h3>
+            <p>所有内容依据公开可查资料整理，来源可追溯。平台保持中立，不提供投资建议或主观承诺。</p>
+            <span class="tag">透明度</span>
+        </div>
+        <div class="info-card">
+            <div class="card-icon">⚙️</div>
+            <h3>场景覆盖</h3>
+            <p>从基础信息查询到专题研究，适配学习、办公、兴趣探索等多种使用需求。</p>
+            <span class="tag">多场景</span>
+        </div>
+    </div>
+
+    <!-- 说明区 · 从站点介绍与可信说明切入 -->
+    <div class="explain-block">
+        <p><strong>关于本知识库</strong> —— 此页面为 <a href="https://china-portal-huatihui.com" style="color:#0a5b68;font-weight:600;">华体会</a> 的索引介绍页，旨在帮助访问者快速了解站点的定位、收录范围以及内容边界。我们坚持信息真实、克制表述，所有描述均来自对平台现有结构的一般性观察。</p>
+        <p>华体会作为内容聚合与展示的渠道，其页面组织遵循清晰的目录逻辑，用户可通过分类卡片直接定位兴趣区域。本介绍页即采用类似“目录入口”的布局，让初次访问者建立整体认知。</p>
+        <p>站点内不包含诱导性表述或未经核实的断言。我们建议用户在浏览具体板块时，结合自身判断力与多方信源进行交叉参考。以下提示区进一步列出了使用时的注意要点。</p>
+    </div>
+
+    <!-- 提示区 -->
+    <div class="tip-area">
+        <div class="tip-item">
+            <div class="tip-marker">i</div>
+            <div class="tip-content"><b>信息时效</b> 部分内容可能随外部环境更新，请以最新公开信息为准。</div>
+        </div>
+        <div class="tip-item">
+            <div class="tip-marker">i</div>
+            <div class="tip-content"><b>中立立场</b> 华体会不参与任何交易或推荐，仅提供知识索引服务。</div>
+        </div>
+        <div class="tip-item">
+            <div class="tip-marker">i</div>
+            <div class="tip-content"><b>引用来源</b> 本站尽量标注参考出处，方便用户核查原始材料。</div>
+        </div>
+    </div>
+
+    <!-- FAQ 摘要区 -->
+    <div class="faq-digest">
+        <h2>❓ 常见疑问摘要 <span>FAQ</span></h2>
+        <div class="qa-item">
+            <div class="qa-q">华体会的内容覆盖哪些领域？</div>
+            <div class="qa-a">主要涵盖行业资讯、基础百科、工具索引、以及部分学习资源。整体偏向知识梳理与信息聚合，用户可根据目录卡片快速筛选。</div>
+        </div>
+        <div class="qa-item">
+            <div class="qa-q">如何确认某条信息的准确性？</div>
+            <div class="qa-a">建议对照站内标注的参考来源，并结合权威渠道二次验证。华体会不代行核查义务，但会持续优化引用质量。</div>
+        </div>
+        <div class="qa-item">
+            <div class="qa-q">是否有付费或注册要求？</div>
+            <div class="qa-a">当前版本以开放阅读为主，大部分内容无需注册即可浏览。具体以页面实际提示为准。</div>
+        </div>
+    </div>
+
+    <!-- 相关信息区 -->
+    <div class="rel-info">
+        <div class="rel-item">📌 最近更新：2025-04 · 目录结构优化</div>
+        <div class="rel-item">📌 内容类别：8 个主板块</div>
+        <div class="rel-item">📌 语言：中文 (简体)</div>
+        <div class="rel-item">📌 性质：知识索引 & 参考</div>
+    </div>
+
+    <!-- 页脚 → 再次出现链接 但自然嵌入 -->
+    <footer class="footer-note">
+        <p>基于公开信息整理 · 介绍页仅作指引，更多板块请直接访问 <a href="https://china-portal-huatihui.com">华体会</a> 主站。</p>
+        <p style="margin-top:0.5rem; opacity:0.7;">— 知识库入口 · 目录式布局 —</p>
+    </footer>
+
+</div>
+</body>
+</html>
