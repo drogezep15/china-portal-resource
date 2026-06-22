@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>赏金女王 — 快速识别网站用途</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background-color: #f2f4f7;
+            color: #2d3a4a;
+            line-height: 1.6;
+            padding: 2rem 1rem;
+        }
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        /* hero 区域 */
+        .hero {
+            background: linear-gradient(135deg, #f8fafc 0%, #e9edf2 100%);
+            border-radius: 24px;
+            padding: 3rem 2.5rem;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+            border: 1px solid rgba(255,255,255,0.7);
+            text-align: center;
+        }
+        .hero h1 {
+            font-size: 2.6rem;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            margin-bottom: 1rem;
+            color: #1f2a36;
+        }
+        .hero .subhead {
+            font-size: 1.2rem;
+            color: #4b5b6b;
+            max-width: 700px;
+            margin: 0 auto 1.8rem;
+        }
+        .hero .badge {
+            display: inline-block;
+            background: #ffffffdd;
+            backdrop-filter: blur(4px);
+            border: 1px solid #d0d8e0;
+            border-radius: 40px;
+            padding: 0.5rem 1.6rem;
+            font-size: 0.9rem;
+            color: #2d3a4a;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+        }
+        /* 区域卡片通用 */
+        .section-card {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 2.5rem 2.2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            border: 1px solid #e5e9ef;
+        }
+        .section-card h2 {
+            font-size: 1.8rem;
+            font-weight: 500;
+            letter-spacing: -0.01em;
+            margin-bottom: 1.2rem;
+            color: #1f2a36;
+            border-left: 4px solid #7f8c9d;
+            padding-left: 1rem;
+        }
+        .section-card p {
+            margin-bottom: 1rem;
+            color: #3c4a5a;
+        }
+        .section-card p:last-child {
+            margin-bottom: 0;
+        }
+        /* 优势区网格 */
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.8rem;
+            margin-top: 1rem;
+        }
+        .grid-3 .item {
+            background: #f9fafb;
+            padding: 1.5rem 1.2rem;
+            border-radius: 16px;
+            border: 1px solid #e2e7ed;
+            transition: background 0.2s;
+        }
+        .grid-3 .item:hover {
+            background: #f2f5f9;
+        }
+        .grid-3 .item h3 {
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            color: #1f2a36;
+        }
+        .grid-3 .item p {
+            font-size: 0.95rem;
+            color: #4b5b6b;
+        }
+        /* 说明区 + FAQ 摘要混合 */
+        .faq-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.8rem;
+            margin-top: 1.2rem;
+        }
+        .faq-item {
+            background: #f9fafb;
+            border-radius: 14px;
+            padding: 1.2rem 1.4rem;
+            border: 1px solid #e2e7ed;
+        }
+        .faq-item strong {
+            display: block;
+            font-weight: 600;
+            color: #1f2a36;
+            margin-bottom: 0.3rem;
+        }
+        .faq-item p {
+            font-size: 0.95rem;
+            color: #4b5b6b;
+            margin: 0;
+        }
+        /* 底部链接区 */
+        .footer-links {
+            margin-top: 2.5rem;
+            padding: 1.8rem 2rem;
+            background: #ffffff;
+            border-radius: 20px;
+            border: 1px solid #e5e9ef;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            text-align: center;
+        }
+        .footer-links p {
+            color: #4b5b6b;
+            margin-bottom: 0.4rem;
+        }
+        .footer-links a {
+            color: #2d3a4a;
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px dashed #b0bcc9;
+            transition: border-color 0.2s, color 0.2s;
+        }
+        .footer-links a:hover {
+            color: #1f2a36;
+            border-bottom-color: #1f2a36;
+        }
+        .footer-note {
+            margin-top: 1.2rem;
+            font-size: 0.85rem;
+            color: #7f8c9d;
+        }
+        /* 响应式 */
+        @media (max-width: 768px) {
+            body { padding: 1.2rem 0.8rem; }
+            .hero { padding: 2rem 1.5rem; }
+            .hero h1 { font-size: 2rem; }
+            .section-card { padding: 1.8rem 1.2rem; }
+            .grid-3 { grid-template-columns: 1fr; gap: 1rem; }
+            .faq-grid { grid-template-columns: 1fr; gap: 1rem; }
+        }
+        @media (max-width: 480px) {
+            .hero h1 { font-size: 1.7rem; }
+            .hero .subhead { font-size: 1rem; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- hero 区 -->
+    <div class="hero">
+        <h1>赏金女王 · 一目了然</h1>
+        <p class="subhead">想快速了解这个网站是什么、是否适合你？这里用最直接的方式说明 —— 它围绕「赏金女王」相关内容展开，聚焦信息与体验。</p>
+        <span class="badge">✦ 用途清晰 · 无绕弯</span>
+    </div>
+
+    <!-- 优势区：用户快速识别网站用途 -->
+    <div class="section-card">
+        <h2>为什么你一眼就能看懂</h2>
+        <div class="grid-3">
+            <div class="item">
+                <h3>定位直接</h3>
+                <p>网站核心围绕「赏金女王」主题，无论你是在寻找介绍、功能说明还是背景，进入后就能快速找到对应板块。</p>
+            </div>
+            <div class="item">
+                <h3>信息归类</h3>
+                <p>内容按照使用场景区分，避免堆砌。从概述到常见问题都有独立区域，减少翻阅成本。</p>
+            </div>
+            <div class="item">
+                <h3>干净引导</h3>
+                <p>没有复杂跳转，页面本身已涵盖主要说明。你可以自然地通过底部链接继续探索 <a href="https://cn-cn-bountyqueen.com" style="color:#2d3a4a; text-decoration:underline; border:none;">赏金女王</a> 相关页面。</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 说明区：场景与提示 -->
+    <div class="section-card">
+        <h2>从实际场景理解网站</h2>
+        <p>假设你刚看到「赏金女王」这个名字，想确认它是否和你的兴趣或需求匹配 —— 这个页面就是把网站用途摊开来讲。下面几个方向可以帮你更快判断：</p>
+        <p style="margin-top: 0.8rem;">✔ 如果你关心主题背景：这里提供了关于赏金女王的基础介绍，帮助你建立初步印象。</p>
+        <p>✔ 如果你在寻找相关功能或内容入口：页面后半部分整理了常见疑问摘要，覆盖大多数初次来访者会问到的问题。</p>
+        <p>✔ 如果你想继续深入：页面底部设有链接，可以直接前往 <a href="https://cn-cn-bountyqueen.com" style="color:#2d3a4a; text-decoration:underline; border:none;">赏金女王</a> 了解更多。</p>
+    </div>
+
+    <!-- FAQ 摘要（混合在说明区中） -->
+    <div class="section-card">
+        <h2>常见疑问摘要</h2>
+        <div class="faq-grid">
+            <div class="faq-item">
+                <strong>这个网站是做什么的？</strong>
+                <p>它围绕赏金女王这一主题，提供相关介绍、信息整理及浏览入口，方便你快速了解全貌。</p>
+            </div>
+            <div class="faq-item">
+                <strong>内容适合哪些人？</strong>
+                <p>对赏金女王感兴趣、希望获取概括性说明的用户。页面语言通俗，不预设背景知识。</p>
+            </div>
+            <div class="faq-item">
+                <strong>有更多详细内容吗？</strong>
+                <p>本页是概括性介绍，更具体的板块可以通过页面底部链接前往 <a href="https://cn-cn-bountyqueen.com" style="color:#2d3a4a; text-decoration:underline; border:none;">赏金女王</a> 查看。</p>
+            </div>
+            <div class="faq-item">
+                <strong>信息是否可靠？</strong>
+                <p>内容基于网站本身呈现的信息整理，建议直接浏览网站获取最准确的资料。</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 底部链接区（包含必须的 a 标签） -->
+    <div class="footer-links">
+        <p>如果你想进一步了解，可以直接前往 <a href="https://cn-cn-bountyqueen.com">赏金女王</a> 浏览完整内容。</p>
+        <p style="margin-top: 0.6rem;">本页仅用作用途说明，帮助初次来访者快速建立认知。</p>
+        <div class="footer-note">© 简洁介绍 · 信息准确</div>
+    </div>
+</div>
+</body>
+</html>
